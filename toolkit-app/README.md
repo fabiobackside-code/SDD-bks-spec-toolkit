@@ -70,6 +70,9 @@ toolkit-app/
 │           ├── tasks-template-net.md
 │           └── tests-template-net.md
 ├── dist/                       JavaScript compilado (gerado por npm run build)
+├── examples/                   Exemplos inteiros estruturados com SDD (ex: Wallet)
+├── skills/                     Skills para automações interativas no cursor/claude
+├── .claude/                    Configurações locais para os skills e agentes
 ├── README.md                   Este arquivo
 ├── INSTALLATION-GUIDE.md       Guia detalhado de instalação
 ├── package.json

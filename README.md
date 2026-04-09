@@ -9,7 +9,7 @@
 ```
 SDD/
 │
-├─ bks-spec-toolkit-novo/     ⭐ FRAMEWORK + FERRAMENTA
+├─ toolkit-app/               ⭐ FRAMEWORK + FERRAMENTA
 │  ├─ docs/                   📚 Documentação de referência
 │  │  ├─ CLAUDE.md            (6 Princípios)
 │  │  ├─ CLAUDE-PROJECT.md    (Stack .NET)
@@ -19,22 +19,15 @@ SDD/
 │  │  ├─ PLAN.md              (5 Fases workflow)
 │  │  └─ VERSIONING.md        (Roadmap v1.0→v2.0)
 │  │
-│  ├─ cli/                    🚀 Ferramenta scaffold
-│  │  ├─ src/                 (TypeScript source)
-│  │  ├─ dist/                (Build compilado)
-│  │  └─ package.json
-│  │
-│  ├─ templates/              📋 Templates reutilizáveis
-│  │  ├─ agnóstic/            (Qualquer linguagem)
-│  │  └─ net/                 (.NET específicas)
+│  ├─ src/                    🚀 TypeScript source code e CLI
+│  ├─ dist/                   (Build compilado)
+│  ├─ package.json
 │  │
 │  ├─ examples/wallet/        💡 Exemplo completo
 │  │  ├─ specs/features/      (5 features: abertura, login, saldo, extrato, transferencia)
 │  │  ├─ src/
 │  │  ├─ tests/
 │  │  └─ CONTINUIDADE.md
-│  │
-│  ├─ projects/               (User projects gerados via CLI)
 │  │
 │  └─ README.md
 │
@@ -102,12 +95,12 @@ cat 01-o-que-e-sdd.md                      # Entenda o conceito
 
 ### 🛠️ **Caminho 2: Criar Novo Projeto Agora**
 ```bash
-cd bks-spec-toolkit-novo/cli
+cd toolkit-app
 npm install && npm run build
 node dist/index.js create                  # Siga os prompts
 
-# Estrutura gerada em projects/seu-projeto
-cd ../../projects/seu-projeto
+# Estrutura gerada
+cd ./seu-projeto
 cat CONTINUIDADE.md
 ```
 
@@ -117,7 +110,7 @@ cat CONTINUIDADE.md
 
 ### 💡 **Caminho 3: Estudar Exemplo Completo**
 ```bash
-cd bks-spec-toolkit-novo/examples/wallet
+cd toolkit-app/examples/wallet
 cat CONTINUIDADE.md
 cat specs/features/abertura/requirements.md    # Primeira feature
 # Compare com src/Domain/, tests/
@@ -129,7 +122,7 @@ cat specs/features/abertura/requirements.md    # Primeira feature
 
 ## 📚 Componentes Principais
 
-### **bks-spec-toolkit-novo/** (Framework Profissional)
+### **toolkit-app/** (Framework Profissional)
 
 **Para:** Criar novos projetos, consultar referência
 
@@ -141,9 +134,9 @@ cat specs/features/abertura/requirements.md    # Primeira feature
 
 **Como usar:**
 ```bash
-cd bks-spec-toolkit-novo/
+cd toolkit-app/
 cat docs/CLAUDE.md                         # Referência de princípios
-node cli/dist/index.js create              # Gerar novo projeto
+node dist/index.js create                  # Gerar novo projeto
 cp -r examples/wallet meu-wallet           # Copiar exemplo
 ```
 
@@ -193,16 +186,16 @@ Documentação sobre como o toolkit foi construído, decisões de arquitetura e 
 | Ver cases reais | `learning/03-cases-praticos/` |
 | Pegar templates prontos | `learning/04-templates/` |
 | Entender o toolkit | `learning/06-toolkit-abordagem/` |
-| Ver exemplo completo (Wallet) | `bks-spec-toolkit-novo/examples/wallet/` |
-| Criar novo projeto | `bks-spec-toolkit-novo/cli/` |
-| Referência completa | `bks-spec-toolkit-novo/docs/` |
+| Ver exemplo completo (Wallet) | `toolkit-app/examples/wallet/` |
+| Criar novo projeto | `toolkit-app/` |
+| Referência completa | `toolkit-app/docs/` |
 | Guia de construção | `TOOLKIT-CONSTRUCTION-GUIDE.md` |
 
 ---
 
 ## ✅ Status Atual
 
-- ✅ Framework completo (bks-spec-toolkit-novo)
+- ✅ Framework completo (toolkit-app)
 - ✅ Educação consolidada (learning — 7 módulos)
 - ✅ Exemplo completo (Wallet com 5 features)
 - ✅ CLI operacional
@@ -224,14 +217,14 @@ Documentação sobre como o toolkit foi construído, decisões de arquitetura e 
 
 2. **Quer criar projeto agora?**
    ```bash
-   cd bks-spec-toolkit-novo/cli
+   cd toolkit-app
    npm install && npm run build
    node dist/index.js create
    ```
 
 3. **Quer estudar exemplo?**
    ```bash
-   cd bks-spec-toolkit-novo/examples/wallet
+   cd toolkit-app/examples/wallet
    cat CONTINUIDADE.md
    ```
 
