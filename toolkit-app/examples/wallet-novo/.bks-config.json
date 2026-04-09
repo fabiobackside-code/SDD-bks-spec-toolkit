@@ -1,0 +1,8 @@
+{
+  "projectName": "wallet-novo",
+  "description": "API de carteira digital — case prático SDD com skills",
+  "techStack": "net",
+  "createdAt": "2026-04-09",
+  "version": "1.0.0",
+  "toolkitVersion": "1.0.1"
+}

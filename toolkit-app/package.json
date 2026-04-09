@@ -1,0 +1,35 @@
+{
+  "name": "bks-spec-toolkit-cli",
+  "version": "1.0.1",
+  "description": "CLI para criação de projetos baseados no bks-spec-toolkit (SDD)",
+  "bin": {
+    "bks-create": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc && npm run copy-assets",
+    "copy-assets": "mkdir -p dist/templates && cp src/templates/*.ejs dist/templates/",
+    "dev": "ts-node src/index.ts",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "lint": "eslint src/**/*.ts"
+  },
+  "keywords": ["sdd", "spec-driven", "cli", "scaffold", "bks"],
+  "author": "Fabio",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "ejs": "^3.1.10",
+    "fs-extra": "^11.2.0",
+    "inquirer": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.7",
+    "@types/node": "^22.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  }
+}
