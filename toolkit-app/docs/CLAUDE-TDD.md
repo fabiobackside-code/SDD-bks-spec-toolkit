@@ -8,11 +8,11 @@
 
 ```
         /\           Architecture (10%)
-       /  \          - ArchUnit: cyclic deps
+       /  \          - Cyclic deps
       /    \         - Pattern validation
      /______\
     /        \       Integration (20%)
-   /          \      - Testcontainers
+   /          \      - Containers (Testcontainers ou equivalente)
   /____________\     - DB + API calls
  /              \    Unit (70%)
 /________________\   - Domain logic
@@ -25,33 +25,33 @@
 
 **O quê testar:** Domain logic, isolado
 
-**Como:** Mock dependencies, sem BD
+**Como:** Mock de dependências, sem BD
 
-**Stack:** xUnit + Moq
+**Stack:** framework de testes unitários + biblioteca de mocks da stack
 
-### Exemplo
+### Exemplo (pseudocódigo agnóstico)
 
-```csharp
-public class AccountAggregateTests
-{
-    [Theory]
-    [InlineData("user@example.com", "John Doe", true)]
-    [InlineData("", "John Doe", false)]
-    [InlineData("invalid-email", "John Doe", false)]
-    public void Create_WithVariousInputs(string email, string name, bool shouldSucceed)
-    {
-        if (shouldSucceed)
-        {
-            var account = Account.Create(Email.Create(email), name, "hash");
-            Assert.NotNull(account);
-        }
-        else
-        {
-            Assert.Throws<DomainException>(() =>
-                Account.Create(Email.Create(email), name, "hash"));
-        }
-    }
-}
+```
+TEST SUITE: AccountAggregateTests
+
+  TEST: "Create_WithValidEmail_Succeeds"
+    ARRANGE: email = "user@example.com", name = "John Doe"
+    ACT:     account = Account.Create(Email.Create(email), name, "hash")
+    ASSERT:  account is not null
+             account.Email == email
+
+  TEST: "Create_WithInvalidEmail_ThrowsDomainException"
+    ARRANGE: email = ""
+    ACT:     Account.Create(Email.Create(email), "John Doe", "hash")
+    ASSERT:  throws DomainException
+
+  TEST: "Create_WithMultipleInputs" [parameterized]
+    DATA:
+      | email                | valid? |
+      | "user@example.com"   | true   |
+      | ""                   | false  |
+      | "invalid-email"      | false  |
+    ASSERT: success when valid, DomainException when invalid
 ```
 
 **Métricas:**
@@ -66,69 +66,43 @@ public class AccountAggregateTests
 
 **O quê testar:** Fluxo completo com BD real
 
-**Como:** Testcontainers + Dapper
+**Como:** Testcontainers (ou equivalente) com banco real em container
 
-**Stack:** xUnit + Testcontainers + PostgreSQL
+**Stack:** framework de testes + Testcontainers + banco da stack
 
-### Exemplo
+### Exemplo (pseudocódigo agnóstico)
 
-```csharp
-public class CreateAccountIntegrationTests : IAsyncLifetime
-{
-    private PostgreSqlContainer _container;
-    private IAccountRepository _repository;
-    private Pipeline _pipeline;
+```
+TEST SUITE: CreateAccountIntegrationTests
+  SETUP:
+    container = start database container (PostgreSQL/MySQL/etc)
+    repository = new DatabaseRepository(container.connectionString)
+    pipeline   = build pipeline with real dependencies
 
-    public async Task InitializeAsync()
-    {
-        _container = new PostgreSqlBuilder().Build();
-        await _container.StartAsync();
-        
-        _repository = new PostgreSqlAccountRepository(
-            new NpgsqlConnection(_container.GetConnectionString())
-        );
-        
-        _pipeline = new Pipeline(new ServiceCollection()
-            .AddScoped<IAccountRepository>(_ => _repository)
-            .BuildServiceProvider()
-        );
-    }
+  TEARDOWN:
+    stop container
 
-    [Fact]
-    public async Task CreateAccountFlow_WithValidInput_PersistsAndRetrieves()
-    {
-        // Arrange
-        var request = new CreateAccountRequest
-        {
-            Email = "user@example.com",
-            FullName = "John Doe",
-            Password = "SecurePass123!"
-        };
+  TEST: "CreateAccountFlow_WithValidInput_PersistsAndRetrieves"
+    ARRANGE:
+      request = {
+        email:    "user@example.com",
+        fullName: "John Doe",
+        password: "SecurePass123!"
+      }
 
-        // Act
-        var result = await _pipeline
-            .AddStep<ValidateEmailStep>()
-            .AddStep<CheckDuplicateStep>()
-            .AddStep<CreateAccountStep>()
-            .AddStep<HashPasswordStep>()
-            .ExecuteAsync<Account>(request);
+    ACT:
+      result = pipeline
+        .addStep(ValidateEmailStep)
+        .addStep(CheckDuplicateStep)
+        .addStep(CreateAccountStep)
+        .addStep(HashPasswordStep)
+        .execute(request)
 
-        // Assert
-        Assert.True(result.Success);
-        
-        var persisted = await _repository.GetByEmailAsync(
-            Email.Create("user@example.com")
-        );
-        Assert.NotNull(persisted);
-        Assert.Equal("John Doe", persisted.FullName);
-    }
-
-    public async Task DisposeAsync()
-    {
-        if (_container != null)
-            await _container.StopAsync();
-    }
-}
+    ASSERT:
+      result.success == true
+      persisted = repository.getByEmail("user@example.com")
+      persisted is not null
+      persisted.fullName == "John Doe"
 ```
 
 **Métricas:**
@@ -140,51 +114,28 @@ public class CreateAccountIntegrationTests : IAsyncLifetime
 
 ## 🏛️ Architecture Tests (10%)
 
-**O quê testar:** Padrões arquiteturais
+**O quê testar:** Padrões arquiteturais e fronteiras de dependência
 
-**Como:** ArchUnit
+**Como:** Ferramenta de análise de dependências da stack (ArchUnit, NetArchTest, Deptrac, etc.)
 
-**Stack:** xUnit + ArchUnit
+**Stack:** framework de testes + biblioteca de architecture testing da stack
 
-### Exemplo
+### Exemplo (pseudocódigo agnóstico)
 
-```csharp
-public class ArchitectureTests
-{
-    [Fact]
-    public void DomainShouldNotDependOnAdapters()
-    {
-        var domainAssembly = typeof(Account).Assembly;
-        var adapterAssemblies = typeof(PostgreSqlAccountRepository).Assembly;
+```
+TEST SUITE: ArchitectureTests
 
-        var classes = Classes
-            .That()
-            .ResideInNamespace("*.Domain.*")
-            .Should()
-            .NotDependOnAny("*.Adapters.*")
-            .GetResult();
+  TEST: "DomainShouldNotDependOnAdapters"
+    ASSERT: classes in namespace "*.Domain.*"
+            must NOT depend on "*.Adapters.*"
 
-        Assert.True(classes.IsSuccessful);
-    }
+  TEST: "NoCyclicDependencies"
+    ASSERT: all assemblies/packages
+            must NOT have cyclic dependencies
 
-    [Fact]
-    public void NoCyclicDependencies()
-    {
-        var allAssemblies = new[] {
-            typeof(Account).Assembly,
-            typeof(PostgreSqlAccountRepository).Assembly
-        };
-
-        var classes = Classes
-            .That()
-            .AreInAnyAssembly(allAssemblies)
-            .Should()
-            .NotHaveCyclicDependencies()
-            .GetResult();
-
-        Assert.True(classes.IsSuccessful);
-    }
-}
+  TEST: "PortsMustBeInDomainOrApplication"
+    ASSERT: interfaces matching "I*Repository" or "I*Service"
+            must reside in "*.Domain.*" or "*.Application.*"
 ```
 
 **Métricas:**
@@ -208,14 +159,19 @@ public class ArchitectureTests
 | Services | ≥80% |
 | **Total** | **≥85%** |
 
-### Como Medir (OpenCover)
+### Como Medir
 
-```bash
-dotnet add package OpenCover --version 4.7.1221
-opencover -register:user -target:"dotnet" -targetargs:"test" -output:"coverage.xml"
-reportgenerator -reports:"coverage.xml" -targetdir:"CoverageReport"
-open CoverageReport/index.html
-```
+Use a ferramenta de cobertura nativa ou mais adotada da stack:
+
+| Stack | Ferramenta |
+|-------|-----------|
+| .NET | `dotnet test --collect:"XPlat Code Coverage"` + ReportGenerator |
+| Java | JaCoCo (`mvn test jacoco:report`) |
+| Python | `pytest --cov` + coverage.py |
+| Node.js | `jest --coverage` ou `c8` |
+| Go | `go test -cover ./...` |
+
+**Resultado esperado:** relatório HTML com cobertura por namespace/módulo, sem linha vermelha em código de domínio.
 
 ---
 
@@ -235,8 +191,8 @@ open CoverageReport/index.html
   - [ ] BD funcional
 
 - [ ] **Architecture Tests**
-  - [ ] ArchUnit passando
   - [ ] Sem cyclic dependencies
+  - [ ] Domain não depende de Adapters
   - [ ] Padrões respeitados
 
 - [ ] **Performance**
@@ -253,7 +209,7 @@ open CoverageReport/index.html
 - ✅ Cada teste independente
 
 🚫 **Mocks demais**
-- ❌ Mock de tudo (until database)
+- ❌ Mock de tudo (até o banco)
 - ✅ Unit testa lógica, Integration testa fluxo
 
 🚫 **Testes lentos**
@@ -261,8 +217,8 @@ open CoverageReport/index.html
 - ✅ Suite com < 5 minutos
 
 🚫 **Assertions genéricos**
-- ❌ Assert.NotNull(result)
-- ✅ Assert.Equal(expected, actual) + mensagem clara
+- ❌ assert result is not null
+- ✅ assert result.id == expectedId (mensagem clara)
 
 ---
 
@@ -274,46 +230,31 @@ open CoverageReport/index.html
 4. **Act** execute a ação
 5. **Assert** valide resultado
 6. **Refatore** se necessário
-7. **Roda suite** e valida cobertura
+7. **Rode a suite** e valide cobertura
 
 ---
 
 ## 🧬 Exemplo Completo: Feature Login
 
-```csharp
-// UNIT TEST - Validar senha
-[Fact]
-public void ValidatePassword_WithCorrectPassword_ReturnsTrue()
-{
-    var hash = BCrypt.HashPassword("password123");
-    var result = BCrypt.Verify("password123", hash);
-    Assert.True(result);
-}
-
-// INTEGRATION TEST - Login flow
-[Fact]
-public async Task LoginFlow_WithValidCredentials_ReturnsJWT()
-{
-    var account = Account.Create(...);
-    await _repository.AddAsync(account);
-    
-    var result = await _authService.AuthenticateAsync("user@example.com", "password");
-    
-    Assert.NotNull(result.AccessToken);
-}
-
-// ARCHITECTURE TEST - Security
-[Fact]
-public void PasswordsNeverInLogs()
-{
-    var classes = Classes
-        .That()
-        .ResideInNamespace("*.Adapters.Outbound.*")
-        .Should()
-        .NotCallMethodWhere(m => m.Name == "Log" && m.ParameterTypes.Any(p => p.Name == "password"))
-        .GetResult();
-    
-    Assert.True(classes.IsSuccessful);
-}
 ```
+// UNIT TEST — Validar senha
+TEST: "ValidatePassword_WithCorrectPassword_ReturnsTrue"
+  ARRANGE: hash = hashFunction("password123")
+  ACT:     result = verify("password123", hash)
+  ASSERT:  result == true
 
+// INTEGRATION TEST — Login flow
+TEST: "LoginFlow_WithValidCredentials_ReturnsToken"
+  ARRANGE:
+    account = Account.Create(...)
+    repository.add(account)
+  ACT:
+    result = authService.authenticate("user@example.com", "password")
+  ASSERT:
+    result.accessToken is not null
+
+// ARCHITECTURE TEST — Segurança
+TEST: "PasswordsNeverPassedToLogger"
+  ASSERT: no class in "*.Adapters.Outbound.*"
+          calls log methods with parameter named "password"
+```

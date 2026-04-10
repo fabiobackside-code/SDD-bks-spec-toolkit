@@ -45,7 +45,9 @@
 - DDD (Aggregates, Entities, Value Objects)
 - Pipeline para orquestração
 
-**Skill disponível:** `/technical-design-doc-creator` — gera `specs/features/<feature>/design.md` completo usando `design-template-net.md`, com namespaces C#, Ports, Adapters e diagrama de fluxo.
+**Skill disponível:** 
+- `/technical-design-doc-creator` — gera `specs/features/<feature>/design.md` completo usando `design-template-net.md`, com namespaces C#, Ports, Adapters e diagrama de fluxo.
+- `/arquiteto` — (Modo `--audit`) audita os prompts de design para verificar conformidade com o DDD.
 
 **Tempo:** 15-20% do total
 
@@ -56,6 +58,7 @@
 - [ ] Ports abstratos definidos
 - [ ] Fluxo diagramado
 - [ ] Decisões documentadas (ADR)
+- [ ] Auditoria validada pelo `/arquiteto`
 
 ---
 
@@ -75,11 +78,15 @@
 **Exemplo:**
 ```
 T-001: Criar Aggregate Account
-  Path: src/Domain/Core/Aggregates/Account.cs
+  Path: src/Domain/Core/Aggregates/Account
   Deps: Nenhuma
-  DoD: ✅ Classe criada, validações no construtor, factory method
+  DoD: ✅ Aggregate criado, validações no construtor, factory method
   Time: 2h
 ```
+
+**Skills disponíveis:**
+- `/sdd-engineer` — guia a geração das implementações exigindo obediência a Hexagonal Arch e prevenção de acoplamentos e dependências cíclicas.
+- `/coding-agent` — delegação em background (pty) para tarefas prolongadas ou monótonas de cópia de Boilerplate.
 
 **Tempo:** 15-20% do total
 
@@ -105,16 +112,19 @@ T-001: Criar Aggregate Account
 - ≥80% de código novo (Repositories, Services)
 
 **Artefatos:**
-- Unit tests (xUnit)
-- Integration tests (Testcontainers)
-- Architecture tests (ArchUnit)
+- Unit tests (framework agnóstico de testes unitários)
+- Integration tests (testes com container ou banco real)
+- Architecture tests (validação de padrões e dependências)
+
+**Skills disponíveis:**
+- `/build-fixer` *(stack-specific)* — Iteração automática para encontrar, categorizar e corrigir erros de compilação, acionado a cada ciclo de Red-Green-Refactor.
 
 **Tempo:** 30-40% do total (maior tempo!)
 
 **Definition of Done:**
 - [ ] Todos CAs têm testes
 - [ ] Cobertura ≥85% global
-- [ ] Sem cyclic dependencies (ArchUnit)
+- [ ] Sem cyclic dependencies (architecture tests)
 - [ ] Suite completa < 5 minutos
 - [ ] Testes independentes (não dependem de ordem)
 
@@ -127,19 +137,20 @@ T-001: Criar Aggregate Account
 **Atividades:**
 - Integrar com outras features
 - Teste end-to-end
-- Documentar API
+- Documentar API (ex: Swagger/OpenAPI, AsyncAPI)
 - Deploy (staging → production)
 - Monitoramento
 
 **Skills disponíveis:**
+- `/arquiteto` — Proteção contra desvios arquiteturais; fiscalização em alta densidade dos artefatos produzidos (Phase 5 check).
 - `/coupling-analysis` — detecta violações de Arquitetura Hexagonal (Domain → Adapters, cyclic deps) antes de abrir o PR
-- `/gh-address-comments` — resolve comentários de review respeitando os contratos SDD (DoD, cobertura ≥80%, ArchUnit)
+- `/gh-address-comments` — resolve comentários de review respeitando os contratos SDD (DoD, cobertura ≥80%, architecture tests)
 
 **Tempo:** 10-15% do total
 
 **Definition of Done:**
 - [ ] Features combinadas sem conflitos
-- [ ] API documentada (Swagger)
+- [ ] API documentada (Swagger/OpenAPI ou equivalente)
 - [ ] Logs estruturados
 - [ ] Alertas configurados
 - [ ] Runbook pronto
@@ -211,7 +222,7 @@ Para feature **Abertura de Conta** (5 RFs, 2 CAs):
 
 🚫 **Falta de rastreabilidade**
 - ❌ RF-001 → (não sei que código implementa)
-- ✅ RF-001 → CA-001 → T-002 → AccountAggregate.cs
+- ✅ RF-001 → CA-001 → T-002 → AccountAggregate
 
 ---
 

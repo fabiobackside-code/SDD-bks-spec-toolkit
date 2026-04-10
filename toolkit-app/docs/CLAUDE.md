@@ -45,43 +45,24 @@ Use **sempre**:
 ## 5️⃣ DoD: Definition of Done
 
 Tarefa só é "pronta" se:
-- ✅ Código implementado
-- ✅ 100% de cobertura (código gerado)
-- ✅ ≥80% de cobertura (código novo)
-- ✅ CAs validadas com testes
-- ✅ ArchUnit passando (sem ciclos)
-- ✅ Suite < 5min
+- ✅ Lógica refatorada e validada por revisão de engenharia
+- ✅ Cobertura ≥80% (100% no código gerado)
+- ✅ CAs provados por testes (sem dependências cíclicas)
+- ✅ Build/compilação verde e estável
+- ✅ Dependências entre módulos revisadas (sem violações arquiteturais)
 
 ---
 
-## 6️⃣ Stack-Agnostic Design
+## 6️⃣ AI System, Workflow & Guidelines
 
-Specs **agnósticas** (padrões genéricos) vs **específicas** (tecnologia).
+**System Prompt Importante:** Assuma o papel de Engenheiro SDD. Siga sempre as 5 Fases do `PLAN.md`. Use os guias na pasta `guidelines/` (Agnósticos e stack-específicos). **NUNCA** pule fases ou escreva código base sem RF/CA aprovados.
 
-- `guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — Padrões agnósticos (Hexagonal + DDD)
-- `guidelines/Implementacao-DotNet-GUIDELINES.md` — Implementações .NET específicas
-- `guidelines/Implementacao-Python-GUIDELINES.md` — (v1.1) Python específicas
+| Fase `PLAN.md` | Escopo |
+| :--- | :--- |
+| **1. Requirements** | Elicite e valide RF/RNF/CA — identifique Aggregates, Value Objects e Bounded Contexts. |
+| **2. Design** | Hexagonal+DDD — gere `design.md` completo com Ports, Adapters e diagrama de fluxo. |
+| **3. Tasks** | Escreva o código guiado pelo `design.md`; respeite Hexagonal Arch e evite acoplamentos. |
+| **4. Tests** | TDD 70/20/10. Corrija erros de build iterativamente até a suite ficar verde. |
+| **5. Integration** | Revise PRs, valide fronteiras arquiteturais e resolva comentários de review. |
 
----
-
-## ⚖️ Antipadrões
-
-🚫 Começar coding sem RF/RNF/RC/CA  
-🚫 Testes com cobertura < 80%  
-🚫 Cyclic dependencies (ArchUnit reprovado)  
-🚫 Especificação ambígua ou incompleta  
-🚫 Rastreabilidade quebrada  
-
----
-
-## 📋 Workflow SDD
-
-```
-1. Requirements  → Validar RF/RNF/RC/CA
-2. Design       → Arquitetura + Padrões
-3. Tasks        → Dividir em trabalho atômico
-4. Tests        → 70/20/10 pyramid
-5. Integration  → Combine + Deploy
-```
-
-**Tempo estimado:** 5 fases, proporcionais ao escopo.
+☠️ **Antipadrões:** Começar código sem CA pronto | Ignorar Guidelines | Dependências Cíclicas | Cobertura < 80%.

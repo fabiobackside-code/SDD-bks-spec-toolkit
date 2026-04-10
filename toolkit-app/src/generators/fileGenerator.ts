@@ -69,10 +69,9 @@ export async function generateProjectFiles(
   }
 
   // 4. Copiar templates agnósticos
-  const templatesAgnosticSrc = path.join(toolkitPath, 'templates');
+  const templatesAgnosticSrc = path.join(toolkitPath, 'templates', 'agnostic');
   const templatesAgnosticDest = path.join(outputPath, 'specs', 'templates');
   if (exists(templatesAgnosticSrc)) {
-    // Copiar apenas arquivos da raiz de templates (não subpastas de outros stacks)
     const templateFiles = [
       'requirements-template.md',
       'design-template.md',

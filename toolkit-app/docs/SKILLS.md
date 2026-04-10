@@ -10,9 +10,12 @@ Skills Claude Code criadas para o bks-spec-toolkit. Cada skill automatiza uma et
 |-------|-------------|--------------------------|-------------------|
 | `domain-analysis` | 1 (Requirements) + 2 (Design) | Aplicando-DDD-GUIDELINES · Identificando-Contextos-Delimitados-GUIDELINES | design.md (seções Aggregates/VOs/BCs) |
 | `technical-design-doc-creator` | 2 (Design) | Arquitetura-Hexagonal-GUIDELINES · Aplicando-DDD-GUIDELINES · Implementacao-DotNet-GUIDELINES | specs/features/\<feature\>/design.md |
+| `sdd-engineer` | 3 (Tasks) + 4 (Tests) | Implementacao-DotNet-GUIDELINES · C# CS Erros Comuns | Código Fonte C# Validado |
+| `coding-agent` | 3 (Tasks) | PLAN.md | Execução via Bash (pty/background) |
+| `build-fixer` | 4 (Tests) | Compilação C# | Zero Erros C# |
+| `arquiteto` | 2 (Design) + 5 (Integration) | Avaliação estrutural do código de acordo com o design | Relatório de Auditoria |
 | `coupling-analysis` | 5 (Integration/Review) | Arquitetura-Hexagonal-GUIDELINES · CLAUDE-TDD (ArchUnit) | Relatório de violações inline |
 | `gh-address-comments` | 5 (Integration/Review) | CLAUDE.md (DoD) · CLAUDE-TDD (suite passando) | Código corrigido + respostas via gh CLI |
-
 ---
 
 ## Skill: `domain-analysis`
@@ -125,15 +128,20 @@ Fase 1: Requirements
   └── /domain-analysis          ← Identifica Aggregates, VOs, BCs a partir de requirements.md
 
 Fase 2: Design
-  └── /technical-design-doc-creator  ← Gera design.md completo (templates/net/)
+  ├── /technical-design-doc-creator  ← Gera design.md completo (templates/net/)
+  └── /arquiteto                 ← Audita o prompt de design 
 
 Fase 3: Tasks
-  └── (manual — preencher tasks.md a partir do design.md gerado)
+  ├── (manual — preencher tasks.md a partir do design.md gerado)
+  ├── /sdd-engineer              ← Garante que a escrita do código respeite o design
+  └── /coding-agent              ← Executa as tarefas longas e maçantes em background
 
 Fase 4: Tests
-  └── (manual — preencher tests.md + implementar suite 70/20/10)
+  ├── (manual — preencher tests.md + implementar suite 70/20/10)
+  └── /build-fixer               ← Integrado iterativamente para garantir compilação verde e estabilidade base do código
 
 Fase 5: Integration
+  ├── /arquiteto                 ← Proteção contra dependências sujas (Auditoria final)
   ├── /coupling-analysis         ← Verifica Hexagonal + cyclic deps antes do PR
   └── /gh-address-comments       ← Resolve review comments respeitando DoD SDD
 ```
