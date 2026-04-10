@@ -18,10 +18,8 @@ O projeto **<%= projectName %>** foi criado com a seguinte estrutura:
 ├── CONTINUIDADE.md           ← Este arquivo
 ├── specs/
 │   ├── CLAUDE.md             ← Princípios globais SDD
-│   ├── CLAUDE-PROJECT.md     ← Regras deste projeto
 │   ├── CLAUDE-TDD.md         ← Estratégia de testes
-│   ├── CLAUDE-ARCHITECT.md   ← Padrões agnósticos
-<% if (techStack === 'net') { %>│   ├── CLAUDE-ARCHITECT-NET.md ← Padrões .NET específicos
+<% if (techStack === 'net') { %>│   ├── guidelines/Implementacao-DotNet-GUIDELINES.md ← Exemplos .NET C#
 <% } %>│   ├── PLAN.md               ← Orquestração das 5 fases
 │   ├── README.md             ← Guia do toolkit
 │   ├── templates/
@@ -49,7 +47,7 @@ Antes de começar a codificar, leia e entenda:
 1. **`specs/CLAUDE.md`** — Princípios do SDD (obrigatório)
 2. **`specs/PLAN.md`** — As 5 fases e critérios de conclusão
 3. **`specs/CLAUDE-TDD.md`** — Como testes funcionam
-<% if (techStack === 'net') { %>4. **`specs/CLAUDE-ARCHITECT-NET.md`** — Padrões e exemplos .NET
+<% if (techStack === 'net') { %>4. **`specs/guidelines/Implementacao-DotNet-GUIDELINES.md`** — Exemplos C# e padrões .NET
 <% } %>
 
 ### 2. Crie Sua Primeira Spec
@@ -89,7 +87,7 @@ Fase 5: Integration      → PR com spec + código
 - [ ] Leu `specs/CLAUDE.md`
 - [ ] Leu `specs/PLAN.md`
 - [ ] Leu `specs/CLAUDE-TDD.md`
-<% if (techStack === 'net') { %>- [ ] Leu `specs/CLAUDE-ARCHITECT-NET.md`
+<% if (techStack === 'net') { %>- [ ] Leu `specs/guidelines/Implementacao-DotNet-GUIDELINES.md`
 <% } %>- [ ] Criou pasta `specs/features/[primeira-feature]/`
 - [ ] Preencheu `requirements.md` da primeira feature
 - [ ] Revisou com Claude (sem ambiguidades)
@@ -111,10 +109,9 @@ Conforme `specs/CLAUDE-TDD.md`:
 | Documento | Propósito |
 |-----------|-----------|
 | `specs/CLAUDE.md` | Princípios globais, regras não negociáveis |
-| `specs/CLAUDE-PROJECT.md` | Stack, padrões deste projeto (personalizar!) |
 | `specs/PLAN.md` | 5 fases com critérios de conclusão |
 | `specs/CLAUDE-TDD.md` | Cobertura, testes, validação de arquitetura |
-<% if (techStack === 'net') { %>| `specs/CLAUDE-ARCHITECT-NET.md` | Exemplos C#: Aggregates, Repository, Pipeline, Minimal APIs |
+<% if (techStack === 'net') { %>| `specs/guidelines/Implementacao-DotNet-GUIDELINES.md` | Exemplos C#: Aggregates, Repository, Pipeline, Minimal APIs |
 <% } %>| `specs/templates/` | Templates para preencher por feature |
 
 ---

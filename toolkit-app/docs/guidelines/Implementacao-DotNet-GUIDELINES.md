@@ -1,6 +1,9 @@
-# CLAUDE-ARCHITECT-NET: Implementação .NET 8+
+# IMPLEMENTAÇÃO-DOTNET-GUIDELINES
 
-**Stack:** .NET 8+, PostgreSQL, Dapper, xUnit, Moq, Testcontainers
+> **Versão:** 1.0  
+> **Escopo:** Implementação .NET 8+ — exemplos concretos de C# para Hexagonal + DDD  
+> **Stack:** .NET 8+, PostgreSQL, Dapper, xUnit, Moq, Testcontainers  
+> **Origem:** Consolidado a partir do antigo CLAUDE-ARCHITECT-NET.md
 
 ---
 
@@ -397,16 +400,39 @@ public class PostgreSqlAccountRepositoryTests : IAsyncLifetime
 
 ---
 
+## 🔧 Stack Requirements
+
+| Componente | Versão | Uso |
+|-----------|--------|-----|
+| .NET | 8+ | Framework |
+| PostgreSQL | 15+ | Banco dados |
+| Dapper | Latest | Queries manuais (não EF Core) |
+| xUnit | Latest | Unit tests |
+| Moq | Latest | Mocks |
+| Testcontainers | Latest | Integration tests |
+| ArchUnit | Latest | Architecture tests |
+
+---
+
 ## ✅ .NET Checklist
 
+### Infraestrutura
+- [ ] .NET 8+ CLI criado
+- [ ] PostgreSQL rodando
 - [ ] `.csproj` com versão .NET 8+
-- [ ] NuGet packages: Dapper, PostgreSQL.Data, xUnit, Moq, Testcontainers
+- [ ] NuGet packages: Dapper, Npgsql, xUnit, Moq, Testcontainers, ArchUnit
+
+### Estrutura
+- [ ] Pastas `src/Domain`, `src/Adapters`, `src/Infrastructure`, `tests/` criadas
 - [ ] Domain classes: Aggregates, Entities, ValueObjects
-- [ ] Port interfaces definidas
-- [ ] PostgreSql repositories implementadas
-- [ ] Minimal API endpoints criadas
+- [ ] Port interfaces definidas em `Domain/Ports/`
+- [ ] PostgreSql repositories implementadas em `Adapters/Outbound/`
+- [ ] Minimal API endpoints criadas em `Adapters/Inbound/`
 - [ ] DI configured in Program.cs
+
+### Testes
 - [ ] Unit tests passando
 - [ ] Integration tests com Testcontainers
 - [ ] ArchUnit validando estrutura
+
 

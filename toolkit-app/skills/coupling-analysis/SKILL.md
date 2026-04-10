@@ -110,4 +110,4 @@ Use sempre este formato:
 
 - `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — Regras detalhadas de dependência
 - `specs/CLAUDE-TDD.md` — Testes de arquitetura com ArchUnit (10% da pirâmide)
-- `specs/CLAUDE-ARCHITECT.md` — Anti-patterns: cyclic dependencies, tight coupling, mixed concerns
+- `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — Anti-patterns: cyclic dependencies, tight coupling, mixed concerns

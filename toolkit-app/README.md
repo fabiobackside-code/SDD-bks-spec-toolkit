@@ -48,17 +48,15 @@ toolkit-app/
 │       └── continuity.ejs      Template EJS para CONTINUIDADE.md
 ├── docs/                       Fonte dos arquivos copiados para projetos gerados
 │   ├── CLAUDE.md               6 Princípios SDD
-│   ├── CLAUDE-PROJECT.md       Stack .NET 8+: libs, padrões, checklist
 │   ├── CLAUDE-TDD.md           Estratégia de testes 70/20/10
-│   ├── CLAUDE-ARCHITECT.md     Arquitetura Hexagonal + DDD (agnóstico)
-│   ├── CLAUDE-ARCHITECT-NET.md Implementações .NET com exemplos C#
 │   ├── PLAN.md                 Workflow SDD em 5 fases
 │   ├── VERSIONING.md           Roadmap e changelog
 │   ├── guidelines/             Guias aprofundados de aplicação
 │   │   ├── Aplicando-DDD-GUIDELINES.md
 │   │   ├── Arquitetura-Hexagonal-GUIDELINES.md
 │   │   ├── Boas-Praticas-PerformanceDotNet-GUIDELINES.md
-│   │   └── Identificando-Contextos-Delimitados-GUIDELINES.md
+│   │   ├── Identificando-Contextos-Delimitados-GUIDELINES.md
+│   │   └── Implementacao-DotNet-GUIDELINES.md
 │   └── templates/              Templates de especificação reutilizáveis
 │       ├── agnostic/           Templates agnósticos de stack
 │       │   ├── requirements-template.md
@@ -92,17 +90,15 @@ meu-projeto/
 ├── CONTINUIDADE.md             Guia de próximos passos gerado via EJS
 ├── specs/
 │   ├── CLAUDE.md               6 Princípios SDD
-│   ├── CLAUDE-PROJECT.md       Stack .NET 8+
 │   ├── CLAUDE-TDD.md           Estratégia de testes
-│   ├── CLAUDE-ARCHITECT.md     Arquitetura Hexagonal + DDD (agnóstico)
-│   ├── CLAUDE-ARCHITECT-NET.md Implementações .NET com exemplos C#
 │   ├── PLAN.md                 Workflow das 5 fases
 │   ├── VERSIONING.md           Roadmap
-│   ├── guidelines/             4 guias de aplicação (ver seção abaixo)
+│   ├── guidelines/             5 guias de aplicação (ver seção abaixo)
 │   │   ├── Aplicando-DDD-GUIDELINES.md
 │   │   ├── Arquitetura-Hexagonal-GUIDELINES.md
 │   │   ├── Boas-Praticas-PerformanceDotNet-GUIDELINES.md
-│   │   └── Identificando-Contextos-Delimitados-GUIDELINES.md
+│   │   ├── Identificando-Contextos-Delimitados-GUIDELINES.md
+│   │   └── Implementacao-DotNet-GUIDELINES.md
 │   ├── templates/              Templates para especificação de features
 │   │   ├── requirements-template.md
 │   │   ├── design-template.md
@@ -129,10 +125,7 @@ meu-projeto/
 | Arquivo | Propósito | Quando usar |
 |---------|-----------|-------------|
 | [docs/CLAUDE.md](docs/CLAUDE.md) | 6 princípios SDD: especificação precisa, rastreabilidade, testes como contrato, padrões obrigatórios, DoD, stack-agnostic | Referência constante — são as regras inegociáveis do projeto |
-| [docs/CLAUDE-PROJECT.md](docs/CLAUDE-PROJECT.md) | Stack .NET 8+: libs mandatórias (Dapper, xUnit, Testcontainers, ArchUnit), padrões, checklist de novo projeto | Ao configurar um novo projeto .NET ou integrar bibliotecas |
 | [docs/CLAUDE-TDD.md](docs/CLAUDE-TDD.md) | Estratégia de testes 70/20/10: unit (xUnit+Moq), integration (Testcontainers), architecture (ArchUnit) | Ao definir a suite de testes de uma feature |
-| [docs/CLAUDE-ARCHITECT.md](docs/CLAUDE-ARCHITECT.md) | Arquitetura Hexagonal + DDD agnóstica: Ports & Adapters, Aggregates, Value Objects, Pipeline, Repository | Ao fazer design de uma feature independente de stack |
-| [docs/CLAUDE-ARCHITECT-NET.md](docs/CLAUDE-ARCHITECT-NET.md) | Implementações .NET: exemplos C# de Aggregate Root, Port, Adapter PostgreSQL, Pipeline, DI | Ao implementar os padrões em código .NET |
 
 ### Workflow
 
@@ -162,7 +155,7 @@ Os guidelines em [docs/guidelines/](docs/guidelines/) são manuais táticos apro
 
 ### [Arquitetura-Hexagonal-GUIDELINES.md](docs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md)
 
-**O que cobre:** Modelo original de Alistair Cockburn — não a versão genérica. Distinção entre Portas Primárias/Secundárias e Adaptadores Primários/Secundários. Regras de dependência, estrutura de pastas, integração com CLAUDE-ARCHITECT.md.
+**O que cobre:** Modelo original de Alistair Cockburn — não a versão genérica. Distinção entre Portas Primárias/Secundárias e Adaptadores Primários/Secundários. Regras de dependência, estrutura de pastas.
 
 **Onde aplicar no projeto:**
 - **Fase Design**: Mapear quais Ports (interfaces) e Adapters (implementações) a feature precisa

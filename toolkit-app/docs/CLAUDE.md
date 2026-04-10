@@ -58,9 +58,9 @@ Tarefa só é "pronta" se:
 
 Specs **agnósticas** (padrões genéricos) vs **específicas** (tecnologia).
 
-- `CLAUDE-ARCHITECT.md` — Padrões agnósticos
-- `CLAUDE-ARCHITECT-NET.md` — Implementações .NET específicas
-- `CLAUDE-ARCHITECT-PYTHON.md` — (v1.1) Python específicas
+- `guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — Padrões agnósticos (Hexagonal + DDD)
+- `guidelines/Implementacao-DotNet-GUIDELINES.md` — Implementações .NET específicas
+- `guidelines/Implementacao-Python-GUIDELINES.md` — (v1.1) Python específicas
 
 ---
 

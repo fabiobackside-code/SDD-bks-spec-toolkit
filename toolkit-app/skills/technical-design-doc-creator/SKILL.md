@@ -5,15 +5,16 @@ description: Gera design.md completo para uma feature SDD em projetos .NET. Use 
 
 # Technical Design Doc Creator — SDD .NET
 
-Transforma `requirements.md` e o modelo de domínio (resultado de `/domain-analysis`) em um `design.md` completo, seguindo `design-template-net.md` e os padrões de CLAUDE-ARCHITECT-NET.md.
+Transforma `requirements.md` e o modelo de domínio (resultado de `/domain-analysis`) em um `design.md` completo, seguindo `design-template-net.md` e os padrões de `Implementacao-DotNet-GUIDELINES.md`.
 
 ## Contexto
 
 Este projeto segue Arquitetura Hexagonal com DDD em .NET 8+. O `design.md` é o artefato central da Fase 2: define quais Aggregates, Ports e Adapters serão implementados nas tasks seguintes. Um design incompleto gera tasks ambíguas e dívida técnica.
 
 Leia antes de iniciar:
-- `specs/CLAUDE-ARCHITECT.md` — Hexagonal Architecture + DDD: Ports & Adapters, Pipeline, Repository Pattern (agnóstico)
-- `specs/CLAUDE-ARCHITECT-NET.md` — Implementações .NET: Aggregate Root em C#, Port interfaces, PostgreSQL Adapter, DI
+- `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — Hexagonal Architecture: Ports & Adapters, regras de dependência (agnóstico)
+- `specs/guidelines/Aplicando-DDD-GUIDELINES.md` — DDD tático: Aggregates, Value Objects, Domain Services
+- `specs/guidelines/Implementacao-DotNet-GUIDELINES.md` — Implementações .NET: Aggregate Root em C#, Port interfaces, PostgreSQL Adapter, DI
 - `specs/templates/net/design-template-net.md` — estrutura exata a ser preenchida
 
 ## Processo
@@ -33,7 +34,7 @@ Extrair de `requirements.md`:
 
 ### 2. Mapear estrutura de pastas
 
-Seguindo `CLAUDE-ARCHITECT-NET.md` e a estrutura hexagonal:
+Seguindo `Implementacao-DotNet-GUIDELINES.md` e a estrutura hexagonal:
 
 ```
 src/<NomeProjeto>/
@@ -146,7 +147,8 @@ Arquivo `specs/features/<feature>/design.md` preenchido usando `specs/templates/
 
 ## Referências
 
-- `specs/CLAUDE-ARCHITECT.md` — padrões agnósticos: Hexagonal, Pipeline, Repository
-- `specs/CLAUDE-ARCHITECT-NET.md` — implementações C# com exemplos
+- `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — padrões agnósticos: Hexagonal, Ports & Adapters, regras de dependência
+- `specs/guidelines/Aplicando-DDD-GUIDELINES.md` — DDD tático: Aggregates, Value Objects, Domain Services
+- `specs/guidelines/Implementacao-DotNet-GUIDELINES.md` — implementações C# com exemplos
 - `specs/templates/net/design-template-net.md` — template de saída obrigatório
-- `specs/CLAUDE-PROJECT.md` — libs mandatórias: Dapper, xUnit, Testcontainers, ArchUnit
+- `specs/guidelines/Implementacao-DotNet-GUIDELINES.md` — libs mandatórias: Dapper, xUnit, Testcontainers, ArchUnit

@@ -8,9 +8,9 @@
 
 ### Features
 - ✅ 6 Princípios SDD (CLAUDE.md)
-- ✅ Stack .NET 8+ (CLAUDE-PROJECT.md)
-- ✅ Padrões agnósticos (CLAUDE-ARCHITECT.md)
-- ✅ Implementações .NET (CLAUDE-ARCHITECT-NET.md)
+- ✅ Stack .NET 8+ (Implementacao-DotNet-GUIDELINES.md)
+- ✅ Padrões agnósticos (Arquitetura-Hexagonal-GUIDELINES.md)
+- ✅ Implementações .NET (Implementacao-DotNet-GUIDELINES.md)
 - ✅ Estratégia TDD (CLAUDE-TDD.md)
 - ✅ Workflow 5 fases (PLAN.md)
 - ✅ CLI para criar projetos (toolkit-app)
@@ -20,9 +20,9 @@
 
 ### Documentation
 - docs/CLAUDE.md — 6 princípios
-- docs/CLAUDE-PROJECT.md — Stack .NET
-- docs/CLAUDE-ARCHITECT.md — Padrões agnósticos
-- docs/CLAUDE-ARCHITECT-NET.md — .NET específico com exemplos C#
+- docs/guidelines/Implementacao-DotNet-GUIDELINES.md — Stack .NET
+- docs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md — Padrões agnósticos
+- docs/guidelines/Implementacao-DotNet-GUIDELINES.md — .NET específico com exemplos C#
 - docs/CLAUDE-TDD.md — Testes 70/20/10
 - docs/PLAN.md — 5 fases workflow
 - README.md — Toolkit overview
@@ -46,7 +46,7 @@
 **ETA:** Q2 2026
 
 ### Python Support
-- [ ] CLAUDE-ARCHITECT-PYTHON.md
+- [ ] Implementacao-Python-GUIDELINES.md
 - [ ] Templates agnósticos + Python
 - [ ] Exemplo Django/FastAPI
 - [ ] CLI com opção `--stack=python`
@@ -71,7 +71,7 @@
 **ETA:** Q3 2026
 
 ### Java Support
-- [ ] CLAUDE-ARCHITECT-JAVA.md
+- [ ] Implementacao-Java-GUIDELINES.md
 - [ ] Templates agnósticos + Java/Spring
 - [ ] Exemplo Spring Boot
 - [ ] CLI com opção `--stack=java`

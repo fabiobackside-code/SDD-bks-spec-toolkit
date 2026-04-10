@@ -32,11 +32,9 @@ wallet-novo/
 ├── .bks-config.json
 ├── specs/
 │   ├── CLAUDE.md               ← 6 princípios SDD
-│   ├── CLAUDE-ARCHITECT.md     ← Hexagonal + DDD (agnóstico)
-│   ├── CLAUDE-ARCHITECT-NET.md ← Implementações .NET com C#
 │   ├── CLAUDE-TDD.md           ← Pirâmide 70/20/10
 │   ├── PLAN.md                 ← 5 fases com skills referenciadas
-│   ├── guidelines/             ← Guias aprofundados
+│   ├── guidelines/             ← Guias aprofundados (incl. Implementacao-DotNet-GUIDELINES)
 │   ├── templates/              ← Templates reutilizáveis
 │   └── features/
 │       ├── abertura/           ← RF-001 a RF-006

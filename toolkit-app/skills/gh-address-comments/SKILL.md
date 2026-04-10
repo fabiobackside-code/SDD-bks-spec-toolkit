@@ -43,7 +43,7 @@ Para cada comentário, classificar antes de agir:
 | **Melhoria de legibilidade** — renomear, extrair método | Implementar se não quebra DoD |
 | **Questão/dúvida** — não é solicitação de mudança | Responder via gh |
 
-Verificar contra `specs/CLAUDE.md` e `specs/CLAUDE-ARCHITECT.md` antes de cada implementação.
+Verificar contra `specs/CLAUDE.md` e `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` antes de cada implementação.
 
 ### 3. Implementar correções
 
@@ -116,5 +116,5 @@ Nunca implementar silenciosamente algo que viola os princípios SDD para "fechar
 
 - `specs/CLAUDE.md` — 6 princípios SDD + DoD (Princípio 5): critério de aprovação de toda mudança
 - `specs/CLAUDE-TDD.md` — Pirâmide 70/20/10: correções que adicionam funcionalidade precisam de testes
-- `specs/CLAUDE-ARCHITECT.md` — Anti-patterns que correções não podem introduzir
-- `specs/CLAUDE-ARCHITECT-NET.md` — Padrões C# que devem ser preservados
+- `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — Anti-patterns que correções não podem introduzir
+- `specs/guidelines/Implementacao-DotNet-GUIDELINES.md` — Padrões C# que devem ser preservados

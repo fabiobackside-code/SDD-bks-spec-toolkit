@@ -116,5 +116,5 @@ Preencher ou criar a seção de domínio em `specs/features/<feature>/design.md`
 
 - `specs/guidelines/Aplicando-DDD-GUIDELINES.md` — definição e regras de cada bloco tático DDD
 - `specs/guidelines/Identificando-Contextos-Delimitados-GUIDELINES.md` — Event Storming e Context Map
-- `specs/CLAUDE-ARCHITECT.md` — padrões agnósticos (Hexagonal + DDD)
+- `specs/guidelines/Arquitetura-Hexagonal-GUIDELINES.md` — padrões agnósticos (Hexagonal + Ports & Adapters)
 - `specs/templates/net/design-template-net.md` — template de saída para projetos .NET

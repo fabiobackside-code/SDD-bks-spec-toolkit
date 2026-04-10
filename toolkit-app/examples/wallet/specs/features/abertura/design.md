@@ -2,7 +2,7 @@
 
 Implementar usando Hexagonal Architecture com Pipeline pattern.
 
-Veja `../../CLAUDE-ARCHITECT.md` e `../../CLAUDE-ARCHITECT-NET.md` para detalhes.
+Veja `../../guidelines/Arquitetura-Hexagonal-GUIDELINES.md` e `../../guidelines/Implementacao-DotNet-GUIDELINES.md` para detalhes.
 
 ## Componentes
 

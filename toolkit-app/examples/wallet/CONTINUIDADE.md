@@ -32,8 +32,7 @@ specs/
 ## 📚 Documentação
 
 - specs/CLAUDE.md — 6 Princípios
-- specs/CLAUDE-PROJECT.md — Stack .NET
-- specs/CLAUDE-ARCHITECT.md — Padrões
+- specs/guidelines/Implementacao-DotNet-GUIDELINES.md — Stack .NET
 - specs/PLAN.md — 5 Fases
 
 ---

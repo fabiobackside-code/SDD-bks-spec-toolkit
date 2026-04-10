@@ -19,10 +19,7 @@ wallet-novo/
 ├── PLANO.md                  ← Guia passo a passo do case (leia primeiro!)
 ├── specs/
 │   ├── CLAUDE.md             ← Princípios globais SDD
-│   ├── CLAUDE-PROJECT.md     ← Regras deste projeto
 │   ├── CLAUDE-TDD.md         ← Estratégia de testes 70/20/10
-│   ├── CLAUDE-ARCHITECT.md   ← Padrões agnósticos
-│   ├── CLAUDE-ARCHITECT-NET.md ← Padrões .NET específicos
 │   ├── PLAN.md               ← Orquestração das 5 fases
 │   ├── VERSIONING.md
 │   ├── guidelines/           ← Guias aprofundados (DDD, Hexagonal, Performance)
@@ -68,7 +65,7 @@ Fase 5     src/ + /coupling-analysis
 - [ ] Leu `PLANO.md`
 - [ ] Leu `specs/CLAUDE.md`
 - [ ] Leu `specs/PLAN.md`
-- [ ] Leu `specs/CLAUDE-ARCHITECT-NET.md`
+- [ ] Leu `specs/guidelines/Implementacao-DotNet-GUIDELINES.md`
 - [ ] Pronto para Fase 1: requirements de `transferencia`
 
 ---

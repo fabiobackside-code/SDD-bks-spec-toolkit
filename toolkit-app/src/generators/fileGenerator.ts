@@ -13,9 +13,7 @@ import {
  */
 const CLAUDE_FILES = [
   'CLAUDE.md',
-  'CLAUDE-PROJECT.md',
   'CLAUDE-TDD.md',
-  'CLAUDE-ARCHITECT.md',
   'PLAN.md',
   'VERSIONING.md',
 ];
@@ -24,7 +22,7 @@ const CLAUDE_FILES = [
  * Arquivos CLAUDE* específicos por tech stack
  */
 const STACK_SPECIFIC_FILES: Record<string, string[]> = {
-  net: ['CLAUDE-ARCHITECT-NET.md'],
+  net: [],
   python: [],
   java: [],
 };
